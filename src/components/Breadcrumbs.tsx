@@ -1,10 +1,12 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { usePathname } from "next/navigation"; 
 
 const Breadcrumbs: React.FC = () => {
-  const router = useRouter();
-  const segments = router.asPath.split("/").filter(Boolean);
+  const pathname = usePathname();
+  const segments = pathname.split("/").filter(Boolean);
 
   return (
     <nav className="mb-4 px-4 pt-16 text-sm text-gray-600 dark:text-gray-400">

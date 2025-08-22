@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import React from "react";
 import { motion, Variants } from "framer-motion";
 
@@ -24,7 +24,7 @@ const itemVariants: Variants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5, ease: "easeOut" as const },
+    transition: { duration: 0.5, ease: "easeOut" },
   },
   hover: {
     textDecoration: "underline",
@@ -57,7 +57,7 @@ const CodingRaces: React.FC = () => (
           variants={itemVariants}
           whileHover="hover"
           whileTap="tap"
-          className="cursor-pointer text-yellow-50"
+          className="cursor-pointer texty"
           tabIndex={0}
         >
           {race}

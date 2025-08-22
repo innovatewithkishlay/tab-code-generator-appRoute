@@ -1,3 +1,4 @@
+"use client";
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Cookies from "js-cookie";
@@ -8,7 +9,7 @@ const NAV_ITEMS = [
   { label: "Pre-lab Questions", path: "/pre-lab" },
   { label: "Escape Room", path: "/escape-room" },
   { label: "Coding Races", path: "/coding-races" },
-  { label: "Court Room", path: "/CourtRoom" },
+  { label: "Court Room", path: "/courtroom" },
   { label: "About", path: "/about" },
 ];
 

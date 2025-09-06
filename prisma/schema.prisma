@@ -1,0 +1,71 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// Store application users (students in this case)
+model User {
+  id            Int             @id @default(autoincrement())
+  name          String
+  studentId     String          @unique
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+
+  // Relations
+  progress      UserProgress[]
+  messages      Message[]
+  testResults   TestResult[]
+  feedbacks     Feedback[]
+}
+
+// Tracks progress per user (stage, timers, extra state)
+model UserProgress {
+  id           Int       @id @default(autoincrement())
+  userId       Int
+  currentStage Int
+  progressData Json
+  timerState   Json
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  user         User      @relation(fields: [userId], references: [id])
+}
+
+// System / app messages linked to users
+model Message {
+  id           Int      @id @default(autoincrement())
+  userId       Int
+  messageText  String
+  messageType  String
+  severity     Int
+  createdAt    DateTime @default(now())
+
+  user         User     @relation(fields: [userId], references: [id])
+}
+
+// Stores results from user tests
+model TestResult {
+  id           Int      @id @default(autoincrement())
+  userId       Int
+  stage        Int
+  resultStatus String
+  details      Json
+  createdAt    DateTime @default(now())
+
+  user         User     @relation(fields: [userId], references: [id])
+}
+
+// User feedback with optional rating
+model Feedback {
+  id           Int      @id @default(autoincrement())
+  userId       Int
+  feedbackText String
+  rating       Int
+  submittedAt  DateTime @default(now())
+
+  user         User     @relation(fields: [userId], references: [id])
+}

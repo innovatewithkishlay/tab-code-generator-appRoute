@@ -25,13 +25,12 @@ model User {
 // Tracks progress per user (stage, timers, extra state)
 model UserProgress {
   id           Int       @id @default(autoincrement())
-  userId       Int
+  userId       Int       @unique 
   currentStage Int
   progressData Json
   timerState   Json
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
-
   user         User      @relation(fields: [userId], references: [id])
 }
 

@@ -6,19 +6,19 @@ const prisma = new PrismaClient();
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { name, studentNumber } = body;
+    const { name, studentId } = body;
 
-    if (!name || !studentNumber) {
-      return NextResponse.json({ message: "Name and studentNumber are required" }, { status: 400 });
+    if (!name || !studentId) {
+      return NextResponse.json({ message: "Name and studentId are required" }, { status: 400 });
     }
 
     let user = await prisma.user.findFirst({
-      where: { studentNumber: String(studentNumber) },
+      where: { studentId: String(studentId) },
     });
 
     if (!user) {
       user = await prisma.user.create({
-        data: { name, studentNumber },
+        data: { name, studentId },
       });
     }
 
